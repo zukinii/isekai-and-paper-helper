@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "Isekai and Paper Helper",
+	"description": "Removes annoying script popups while playing Isekai and Paper. 🎮😎",
+	"version": "0.1",
+	"author": "zukini",
+	"permissions": ["activeTab"],
+	"browser_action": {
+		"default_icon": {
+			"48": "images/icon48.png"
+		},
+		"default_title": "Isekai and Paper Helper",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://docs.google.com/spreadsheets/*"],
+			"css": ["style.css"]
+		}
+	]
+}
