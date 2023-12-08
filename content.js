@@ -2,6 +2,11 @@ const addActionsToDrawings = async () => {
 	// wait some time until the drawings are loaded
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 
+	// if there are no drawings, wait another 3 seconds and try again
+	if (!document.querySelectorAll('.waffle-borderless-embedded-object-overlay').length) {
+		await new Promise((resolve) => setTimeout(resolve, 3000))
+	}
+
 	const drawings = document.querySelectorAll('.waffle-borderless-embedded-object-overlay')
 	drawings.forEach((drawing) => drawing.addEventListener('click', onDrawingClick))
 }
