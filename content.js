@@ -37,8 +37,8 @@ const onDrawingClick = (e) => {
 	// sounds from https://soundbible.com/tags-rolling-dice.html
 	const allSounds = ['audio/dice1.mp3', 'audio/dice2.mp3', 'audio/dice-redneck.mp3']
 
-	// if the aria-label contains the value "würfelsound" then play the audio file
-	if (drawing.getAttribute('aria-label').toLowerCase().includes('würfelsound')) {
+	// if the aria-label contains the right value
+	if (drawing.getAttribute('aria-label').toLowerCase().includes('würfel')) {
 		// play a random sound. make dic1 and dice2 evenly likely (50% each) and dice-redneck less likely (5%)
 		const random = Math.random()
 		if (random < 0.5) {
@@ -48,7 +48,24 @@ const onDrawingClick = (e) => {
 		} else {
 			playAudio(allSounds[2])
 		}
+
+		animateDice(drawing)
 	}
+}
+
+const animateDice = (element) => {
+	element.style.transform = 'translateX(-10px) rotate(-5deg)'
+	element.style.transition = 'transform 0.1s ease-in-out'
+	setTimeout(() => {
+		element.style.transform = 'translateX(10px) rotate(5deg)'
+	}, 100)
+	setTimeout(() => {
+		element.style.transform = 'translateX(-10px) rotate(-5deg)'
+	}, 200)
+	setTimeout(() => {
+		// reset the transform
+		element.style.transform = ''
+	}, 300)
 }
 
 const getRuntimeURL = (file) => {
