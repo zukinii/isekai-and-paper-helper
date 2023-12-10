@@ -1,7 +1,6 @@
-const addActionsToDrawings = async () => {
-	// wait some time until the drawings are loaded
-	await new Promise((resolve) => setTimeout(resolve, 5000))
+const browserObject = typeof chrome !== 'undefined' ? chrome : typeof browser !== 'undefined' ? browser : null
 
+const addActionsToDrawings = async () => {
 	// if there are no drawings, wait another 3 seconds and try again
 	if (!document.querySelectorAll('.waffle-borderless-embedded-object-overlay').length) {
 		await new Promise((resolve) => setTimeout(resolve, 3000))
@@ -9,6 +8,27 @@ const addActionsToDrawings = async () => {
 
 	const drawings = document.querySelectorAll('.waffle-borderless-embedded-object-overlay')
 	drawings.forEach((drawing) => drawing.addEventListener('click', onDrawingClick))
+}
+
+const initTabChangeEvent = () => {
+	// when the tab changes, a specific container is removed and re-added
+	const observer = new MutationObserver((mutations) => {
+		mutations.forEach((mutation) => {
+			if (mutation.removedNodes.length) {
+				console.log('tab changed')
+				onTabChange()
+			}
+		})
+	})
+
+	observer.observe(document.querySelector('#docs-editor #waffle-grid-container'), {
+		childList: true,
+		subtree: false,
+	})
+}
+
+const onTabChange = () => {
+	addActionsToDrawings()
 }
 
 const onDrawingClick = (e) => {
@@ -32,23 +52,24 @@ const onDrawingClick = (e) => {
 }
 
 const getRuntimeURL = (file) => {
-	if (chrome) {
-		return chrome.runtime.getURL(file)
-	} else if (browser) {
-		return browser.runtime.getURL(file)
-	} else {
-		// Handle other cases or provide a default value
-		return file
-	}
+	if (!browserObject) return file
+
+	return browserObject.runtime.getURL(file)
 }
 
 const playAudio = (file) => {
+	console.log('playing audio', file)
+
 	const audio = new Audio(getRuntimeURL(file))
 	audio.play()
 }
 
-const init = () => {
+const init = async () => {
+	// wait some time until the drawings are loaded
+	await new Promise((resolve) => setTimeout(resolve, 5000))
+
 	addActionsToDrawings()
+	initTabChangeEvent()
 }
 
 init()

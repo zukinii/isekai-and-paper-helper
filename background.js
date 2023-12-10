@@ -1,3 +1,5 @@
+const browserObject = typeof chrome !== 'undefined' ? chrome : typeof browser !== 'undefined' ? browser : null
+
 let stylesEnabled = true
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

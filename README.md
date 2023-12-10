@@ -1,16 +1,10 @@
 # install instructions
 
-## how to add extension in firefox
+## wie fügt man die Erweiterung in chrome hinzu
 
-- open about:debugging#/runtime/this-firefox
-- click on load temporary add-on
-- select manifest.json file
-
-## how to add extension in chrome
-
-- open chrome://extensions/
-- click on load unpacked
-- select the folder
+- Öffne chrome://extensions/
+- Klicke auf "Entpackte Erweiterung laden"
+- Wähle den Ordner aus
 
 ## wie fügt man die Erweiterung in firefox hinzu
 
@@ -18,8 +12,14 @@
 - Klicke auf "Temporäre Add-ons laden"
 - Wähle die manifest.json-Datei aus
 
-## wie fügt man die Erweiterung in chrome hinzu
+## how to add extension in chrome
 
-- Öffne chrome://extensions/
-- Klicke auf "Entpackte Erweiterung laden"
-- Wähle den Ordner aus
+- open chrome://extensions/
+- click on load unpacked
+- select the folder
+
+## how to add extension in firefox
+
+- open about:debugging#/runtime/this-firefox
+- click on load temporary add-on
+- select manifest.json file
