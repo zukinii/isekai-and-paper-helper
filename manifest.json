@@ -23,5 +23,5 @@
 		"scripts": ["background.js"],
 		"persistent": false
 	},
-	"web_accessible_resources": ["audio/dice1.mp3", "audio/dice2.mp3", "audio/dice-redneck.mp3"]
+	"web_accessible_resources": ["audio/rattling.mp3", "audio/clatter.mp3", "audio/tap.wav"]
 }

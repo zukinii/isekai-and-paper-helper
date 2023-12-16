@@ -33,28 +33,32 @@ const onTabChange = () => {
 
 const onDrawingClick = (e) => {
 	const drawing = e.currentTarget
-
-	// sounds from https://soundbible.com/tags-rolling-dice.html
-	const allSounds = ['audio/dice1.mp3', 'audio/dice2.mp3', 'audio/dice-redneck.mp3']
+	const ariaLabel = drawing.getAttribute('aria-label').toLowerCase()
 
 	// if the aria-label contains the right value
-	if (drawing.getAttribute('aria-label').toLowerCase().includes('würfel')) {
-		// play a random sound. make dic1 and dice2 evenly likely (50% each) and dice-redneck less likely (5%)
-		const random = Math.random()
-		if (random < 0.5) {
-			playAudio(allSounds[0])
-		} else if (random < 0.95) {
-			playAudio(allSounds[1])
-		} else {
-			playAudio(allSounds[2])
-		}
-
+	if (ariaLabel.includes('würfel')) {
+		makeDiceSound()
 		animateDice(drawing)
+	}
+	if (ariaLabel.includes('pfeil-rauf')) {
+		playAudio('tap.wav')
+		animateArrowUp(drawing)
+	}
+	if (ariaLabel.includes('pfeil-runter')) {
+		playAudio('tap.wav')
+		animateArrowDown(drawing)
 	}
 }
 
+const makeDiceSound = () => {
+	playAudio('rattling.mp3', 1.5)
+	setTimeout(() => {
+		playAudio('clatter.mp3')
+	}, 1000)
+}
+
 const animateDice = (element) => {
-	element.style.transform = 'translateX(-10px) rotate(-5deg)'
+	// animate the dice
 	element.style.transition = 'transform 0.1s ease-in-out'
 	setTimeout(() => {
 		element.style.transform = 'translateX(10px) rotate(5deg)'
@@ -68,16 +72,45 @@ const animateDice = (element) => {
 	}, 300)
 }
 
+const animateArrowUp = (element) => {
+	// make it grow and fade out and then return to normal, but really fast to make it subtle
+	element.style.transition = 'transform 0.1s ease-in-out, opacity 0.1s ease-in-out'
+	setTimeout(() => {
+		element.style.transform = 'scale(1.1)'
+		element.style.opacity = 0.5
+	}, 100)
+	setTimeout(() => {
+		element.style.transform = ''
+		element.style.opacity = 1
+	}, 200)
+}
+
+const animateArrowDown = (element) => {
+	// the same as arrow up, but shrink instead of grow
+	element.style.transition = 'transform 0.1s ease-in-out, opacity 0.1s ease-in-out'
+	setTimeout(() => {
+		element.style.transform = 'scale(0.9)'
+		element.style.opacity = 0.5
+	}, 100)
+	setTimeout(() => {
+		element.style.transform = ''
+		element.style.opacity = 1
+	}, 200)
+}
+
 const getRuntimeURL = (file) => {
 	if (!browserObject) return file
 
 	return browserObject.runtime.getURL(file)
 }
 
-const playAudio = (file) => {
-	console.log('playing audio', file)
+const playAudio = (name, speed = 1) => {
+	console.log('playing audio', name)
+
+	const file = `audio/${name}`
 
 	const audio = new Audio(getRuntimeURL(file))
+	audio.playbackRate = speed
 	audio.play()
 }
 
