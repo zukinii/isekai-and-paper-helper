@@ -105,8 +105,6 @@ const getRuntimeURL = (file) => {
 }
 
 const playAudio = (name, speed = 1) => {
-	console.log('playing audio', name)
-
 	const file = `audio/${name}`
 
 	const audio = new Audio(getRuntimeURL(file))
@@ -132,8 +130,6 @@ const listenForMessages = () => {
 		if (request.toggleStyles) {
 			toggleStyles()
 		}
-
-		return Promise.resolve({ status: 'ok' })
 	})
 }
 

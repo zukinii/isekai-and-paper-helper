@@ -4,7 +4,7 @@ const styleToggle = document.querySelector('#styletoggle')
 
 console.log('popup.js loaded', styleToggle)
 
-styleToggle.addEventListener('change', async () => {
+styleToggle?.addEventListener('change', async () => {
 	console.log('style toggle changed')
 
 	browserObject.runtime.sendMessage({ toggleStyles: styleToggle.checked })
