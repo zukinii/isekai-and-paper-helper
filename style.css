@@ -1,3 +1,7 @@
 .docs-butterbar-container {
 	display: none;
 }
+
+#docs-chrome {
+	background-color: green !important;
+}

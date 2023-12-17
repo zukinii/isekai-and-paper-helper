@@ -114,12 +114,36 @@ const playAudio = (name, speed = 1) => {
 	audio.play()
 }
 
+const toggleStyles = () => {
+	const style = document.querySelector('#style')
+	if (!style) return
+
+	if (style.disabled) {
+		style.disabled = false
+	} else {
+		style.disabled = true
+	}
+}
+
+const listenForMessages = () => {
+	console.log('listening for messages')
+	browserObject.runtime.onMessage.addListener((request) => {
+		console.log('message received', request)
+		if (request.toggleStyles) {
+			toggleStyles()
+		}
+
+		return Promise.resolve({ status: 'ok' })
+	})
+}
+
 const init = async () => {
 	// wait some time until the drawings are loaded
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 
 	addActionsToDrawings()
 	initTabChangeEvent()
+	listenForMessages()
 }
 
 init()
