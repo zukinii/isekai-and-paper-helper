@@ -1,3 +1,26 @@
+/* remove script popups */
 .docs-butterbar-container {
 	display: none;
+}
+
+/* for fullscreen (kinda) */
+#docs-chrome.fullscreen {
+	display: none;
+}
+#docs-editor-container.fullscreen::before,
+#docs-editor-container.fullscreen::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: black;
+	z-index: 1;
+}
+#docs-editor-container.fullscreen::before {
+	width: 100vw;
+	height: 24px;
+}
+#docs-editor-container.fullscreen::after {
+	width: 46px;
+	height: 100vh;
 }
