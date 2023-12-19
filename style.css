@@ -3,6 +3,13 @@
 	display: none;
 }
 
+/* drawings */
+.waffle-borderless-embedded-object-overlay[aria-label]:not([aria-label='Bild ']):not([aria-label='Zeichnung ']):not([aria-label='Drawing ']):not(
+		[aria-label='']
+	) {
+	cursor: pointer !important;
+}
+
 /* for fullscreen (kinda) */
 #docs-chrome.fullscreen {
 	display: none;

@@ -48,6 +48,14 @@ const onDrawingClick = (e) => {
 		playAudio('tap.wav')
 		animateArrowDown(drawing)
 	}
+	if (ariaLabel.includes('xp-button')) {
+		playAudio('xpgain.wav')
+		animateXpArrow(drawing)
+	}
+	if (ariaLabel.includes('ka-ching-button') || ariaLabel.includes('geld-button')) {
+		playAudio('geldsound.wav')
+		animateMoneyArrow(drawing)
+	}
 }
 
 const makeDiceSound = () => {
@@ -95,6 +103,31 @@ const animateArrowDown = (element) => {
 	setTimeout(() => {
 		element.style.transform = ''
 		element.style.opacity = 1
+	}, 200)
+}
+
+const animateXpArrow = (element) => {
+	// rotate it a bit, then rotate in the other direction the same amount, then reset
+	element.style.transition = 'transform 0.1s ease-in-out'
+	setTimeout(() => {
+		element.style.transform = 'rotate(15deg)'
+	}, 100)
+	setTimeout(() => {
+		element.style.transform = 'rotate(-15deg)'
+	}, 200)
+	setTimeout(() => {
+		element.style.transform = ''
+	}, 300)
+}
+
+const animateMoneyArrow = (element) => {
+	// make it move left slowly and then return to normal a bit faster
+	element.style.transition = 'transform 0.1s ease-in-out'
+	setTimeout(() => {
+		element.style.transform = 'translateX(-20px)'
+	}, 100)
+	setTimeout(() => {
+		element.style.transform = ''
 	}, 200)
 }
 

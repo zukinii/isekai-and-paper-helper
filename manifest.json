@@ -19,5 +19,5 @@
 			"js": ["content.js"]
 		}
 	],
-	"web_accessible_resources": ["audio/rattling.mp3", "audio/clatter.mp3", "audio/tap.wav"]
+	"web_accessible_resources": ["audio/rattling.mp3", "audio/clatter.mp3", "audio/tap.wav", "audio/xpgain.wav", "audio/geldsound.wav"]
 }
