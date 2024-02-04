@@ -27,6 +27,8 @@
 		"audio/xp.wav",
 		"audio/geldsound.wav",
 		"audio/rest.wav",
-		"audio/unequip.wav"
+		"audio/unequip.wav",
+		"audio/heal.wav",
+		"audio/dmg.wav"
 	]
 }
