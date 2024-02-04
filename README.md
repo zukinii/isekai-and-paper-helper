@@ -1,3 +1,9 @@
+# general information
+
+## sound hinzufügen
+
+- füge die sounddatei in den ordner `sounds` hinzu und in web_accessible_resources in der manifest.json datei
+
 # install instructions
 
 ## wie fügt man die Erweiterung in chrome hinzu

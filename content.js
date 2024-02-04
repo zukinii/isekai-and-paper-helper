@@ -35,26 +35,40 @@ const onDrawingClick = (e) => {
 	const drawing = e.currentTarget
 	const ariaLabel = drawing.getAttribute('aria-label').toLowerCase()
 
-	// if the aria-label contains the right value
+	// make it configurable. if it contains .mp3 or .wav, play the sound. play animation if it contains animation-<name>
+	// sounds: get the label (with either file ending) play the sound. it could look like "something tap.wav animation-bounce"
+	const sound = ariaLabel.match(/(\w+\.(mp3|wav))/i)
+	if (sound) {
+		playAudio(sound[0])
+	}
+
+	const animation = ariaLabel.match(/animation-(\w+)/i)
+
+	if (animation) {
+		const animationName = animation[1]
+		switch (animationName) {
+			case 'schütteln':
+				animateDice(drawing)
+				break
+			case 'wachsen':
+				animateArrowUp(drawing)
+				break
+			case 'schrumpfen':
+				animateArrowDown(drawing)
+				break
+			case 'rotieren':
+				animateXpArrow(drawing)
+				break
+			case 'schieben':
+				animateMoneyArrow(drawing)
+				break
+		}
+	}
+
+	// still make "würfel" work because it's the most common
 	if (ariaLabel.includes('würfel')) {
 		makeDiceSound()
 		animateDice(drawing)
-	}
-	if (ariaLabel.includes('pfeil-rauf')) {
-		playAudio('tap.wav')
-		animateArrowUp(drawing)
-	}
-	if (ariaLabel.includes('pfeil-runter')) {
-		playAudio('tap.wav')
-		animateArrowDown(drawing)
-	}
-	if (ariaLabel.includes('xp-button')) {
-		playAudio('xpgain.wav')
-		animateXpArrow(drawing)
-	}
-	if (ariaLabel.includes('ka-ching-button') || ariaLabel.includes('geld-button')) {
-		playAudio('geldsound.wav')
-		animateMoneyArrow(drawing)
 	}
 }
 
