@@ -1,10 +1,11 @@
 {
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"name": "Isekai and Paper Helper",
-	"description": "Isekai and Paper Sounds, Animations, Popups Blocker, and more! 🎲",
+	"description": "Removes annoying script popups while playing Isekai and Paper. 🎮😎",
 	"version": "0.1",
 	"author": "zukini",
-	"action": {
+	"permissions": ["activeTab"],
+	"browser_action": {
 		"default_icon": {
 			"48": "images/icon48.png"
 		},
@@ -19,9 +20,15 @@
 		}
 	],
 	"web_accessible_resources": [
-		{
-			"resources": ["audio/*"],
-			"matches": ["*://*/*"]
-		}
+		"audio/rattling.mp3",
+		"audio/clatter.mp3",
+		"audio/tap.wav",
+		"audio/xpgain.wav",
+		"audio/xp.wav",
+		"audio/geldsound.wav",
+		"audio/rest.wav",
+		"audio/unequip.wav",
+		"audio/heal.wav",
+		"audio/dmg.wav"
 	]
 }
