@@ -1,0 +1,27 @@
+{
+	"manifest_version": 3,
+	"name": "Isekai and Paper Helper",
+	"description": "Isekai and Paper Sounds, Animations, Popups Blocker, and more! 🎲",
+	"version": "0.1",
+	"author": "zukini",
+	"action": {
+		"default_icon": {
+			"48": "images/icon48.png"
+		},
+		"default_title": "Isekai and Paper Helper",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://docs.google.com/spreadsheets/*"],
+			"css": ["style.css"],
+			"js": ["content.js"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["audio/*"],
+			"matches": ["*://*/*"]
+		}
+	]
+}
